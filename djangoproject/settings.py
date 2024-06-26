@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from celery.schedules import crontab
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,14 +44,47 @@ INSTALLED_APPS = [
     'film',
     'serials',
     'authentication',
+    'djangoproject',
     #other
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
     'corsheaders', 
     'import_export',
-    'simple_history'
+    'simple_history',
+    'social_django',
+    'drf_yasg',
+    'django_celery_beat'
+    # 'rest_framework_social_oauth2',
+    # 'oauth2_provider'
 ]
+#celery mailhog
+CELERY_BEAT_SCHEDULE = {
+    'send_daily_emails': {
+        'task': 'djangoproject.tasks.send_daily_email', 
+        # 'schedule': crontab(hour=8, minute=0),
+        'schedule': crontab(),
+        'args': ('user@example.com',),
+    },
+}
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:16379/0' 
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:16379/0' 
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Moscow'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+
+#----
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,6 +162,7 @@ USE_I18N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -140,9 +174,31 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '51948559'
+SOCIAL_AUTH_VK_OAUTH2_SECRET  = 'Vz20JSgxwPPOG3vhlgRY'
+
+SOCIAL_AUTH_GITHUB_KEY = 'Ov23li5ONJCy23gmcqZs'
+
+SOCIAL_AUTH_GITHUB_SECRET = '2ff280048e3a00b75164523227da3f63c20fcb82'
+
+# AUTHENTICATION_BACKENDS = (
+#   'social_core.backends.vk.VKOAuth2',
+#   'rest_framework_social_oauth2.backends.DjangoOAuth2',
+#   'django.contrib.auth.backends.ModelBackend'
+# )
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2', 
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'rest_framework_social_oauth2.authentication.SocialAuthentication'
      ], 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -174,3 +230,8 @@ CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
                       'access-control-allow-methods')
 
 # AUTH_USER_MODEL = 'authentication.User'
+
+#linter 
+PYLINT_RUNNER_ENABLED = True
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+

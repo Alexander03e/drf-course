@@ -9,6 +9,27 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    depends_on:
+      - redis
+      - mailhog
     environment:
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
+  redis:
+    image: redis:6.2
+  flower:
+    image: mher/flower
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    environment:
+      - BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - FLOWER_BROKER_URL=redis://redis:6379/0
+      - FLOWER_RESULT_BACKEND=redis://redis:6379/0
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"

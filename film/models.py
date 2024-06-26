@@ -4,6 +4,7 @@ from simple_history.models import HistoricalRecords
 # Create your models here.
 
 class Director(models.Model):
+    # fixtures = ['films']
     name=models.CharField('Режиссер', max_length=100, default='')
 
     def __str__(self):
@@ -14,6 +15,7 @@ class Director(models.Model):
         verbose_name_plural = 'Режиссеры'
 
 class Genre(models.Model):
+    # fixtures = ['films']
     name=models.CharField('Жанр', max_length=50, default ='')
 
     def __str__(self):
@@ -23,6 +25,7 @@ class Genre(models.Model):
         verbose_name='Жанр'
         verbose_name_plural = 'Жанры'
 class Rate(models.Model):
+    # fixtures = ['films']
     stars = models.IntegerField('Рейтинг', default=0)
     history = HistoricalRecords()
 
@@ -34,6 +37,8 @@ class Rate(models.Model):
         verbose_name_plural = 'Рейтинг'
 
 class Films(models.Model):
+
+    fixtures = ['films']
     title = models.CharField('Фильм', max_length=50, default='') 
     actors = models.CharField('Актеры', max_length = 200, default = '')
     subtitle =  models.TextField('Описаниее')
@@ -54,7 +59,3 @@ class Films(models.Model):
     class Meta:
         verbose_name = 'Фильм'
         verbose_name_plural = 'Фильмы'
-    
-
-
-

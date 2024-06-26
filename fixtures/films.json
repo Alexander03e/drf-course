@@ -1,0 +1,95 @@
+[
+  {
+    "model": "film.Director",
+    "pk": 1,
+    "fields": {
+      "name": "Квентин Тарантино"
+    }
+  },
+  {
+    "model": "film.Director",
+    "pk": 2,
+    "fields": {
+      "name": "Кристофер Нолан"
+    }
+  },
+  {
+    "model": "film.Genre",
+    "pk": 1,
+    "fields": {
+      "name": "Криминал"
+    }
+  },
+  {
+    "model": "film.Genre",
+    "pk": 2,
+    "fields": {
+      "name": "Триллер"
+    }
+  },
+  {
+    "model": "film.Genre",
+    "pk": 3,
+    "fields": {
+      "name": "Драма"
+    }
+  },
+  {
+    "model": "film.Rate",
+    "pk": 1,
+    "fields": {
+      "stars": 5
+    }
+  },
+  {
+    "model": "film.Rate",
+    "pk": 2,
+    "fields": {
+      "stars": 4
+    }
+  },
+  {
+    "model": "film.Films",
+    "pk": 1,
+    "fields": {
+      "title": "Криминальное чтиво",
+      "actors": "Джон Траволта, Сэмюэл Л. Джексон, Ума Турман",
+      "subtitle": "Два гангстера, Винсент Вега и Джулс Винфилд, отправляются на задание, которое оказывается полным неожиданных событий.",
+      "year": 1994,
+      "image": "static/img/Pulp_Fiction.jpg",
+      "is_favorite": true,
+      "rating_stars": [
+        1
+      ],
+      "direct": [
+        1
+      ],
+      "genre": [
+          1,
+          2
+      ]
+    }
+  },
+  {
+    "model": "film.Films",
+    "pk": 2,
+    "fields": {
+      "title": "Начало",
+      "actors": "Леонардо ДиКаприо, Джозеф Гордон-Левитт, Эллен Пейдж",
+      "subtitle": "Доминик Кобб — профессиональный вор, специализирующийся на краже ценной информации путем проникновения в подсознание людей.",
+      "year": 2010,
+      "image": "static/img/Inception.jpg",
+      "is_favorite": false,
+      "rating_stars": [
+          2
+      ],
+      "direct": [
+          2
+      ],
+      "genre": [
+          2,
+          3
+      ]
+    }
+  }
+]

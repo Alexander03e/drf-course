@@ -18,6 +18,8 @@ from .filters import GenreFilterBackend
 from rest_framework import status
 import django_filters
 
+def auth(request):
+    return render(request, 'oauth.html')
 
 class FilmsListView(viewsets.ModelViewSet):
     serializer_class = FilmsSerializer
