@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*'
+SECRET_KEY = 'django-insecure-s^2zhghn4e1b07isdn4mmawz%76kn6qwe)#mvsba_vve(h2jy4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -178,9 +178,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-SOCIAL_AUTH_GITHUB_KEY = '***'
 
-SOCIAL_AUTH_GITHUB_SECRET = '***'
 
 # AUTHENTICATION_BACKENDS = (
 #   'social_core.backends.vk.VKOAuth2',
